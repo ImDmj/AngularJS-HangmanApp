@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman App</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+
+<!-- ng-app tells the app where the root element is, ng-controller- links the part with a particular controller -->
+<body ng-app="HangmanApp" ng-controller="GameController">
+<div>
+	<div>
+		Guesses Left : {{guesses}}
+	</div>
+	<div>
+		Incorrect Guesses : <span ng-repeat = "letter in incorrectGuess">{{letter}}</span>
+	</div>
+	<div>
+		Correct Guesses : <span ng-repeat = "letter in correctGuess">{{letter}}</span>
+	</div>
+	<div>Word you have to Guess : {{displayWord}}</div>
+	<div>
+		<div>
+			<input type="text" name="guess" ng-model = "input.letter">
+			<button ng-click ="letterChoosen()">Submit</button>
+		</div>
+
+	</div>
+</div>	
+
+</body>
+</html>
