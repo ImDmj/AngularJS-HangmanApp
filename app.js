@@ -7,7 +7,7 @@ var app = angular.module("HangmanApp",[]);
 //we need to pass function which takes $scope as parameter. $scope - i want it to be available in the controller so pass it as the parameter t
 // to the function, also i want it to be available in the index.html so pass it along with the function giving us "Dependency Injection".
 // All the properties attached to the $scope will be available in index.html now eg. $scope.demo="somestring"
-app.controller("GameController",['$scope',function($scope){
+app.controller("GameController",['$scope','$timeout', function($scope, $timeout){
 
 var words = ["ratle", "cat", "matter", "bat", "sat", "hat"]
 $scope.incorrectGuess = [];
@@ -66,9 +66,19 @@ $scope.letterChoosen = function(){
 	if (correct) {
 		$scope.correctGuess.push($scope.input.letter.toLowerCase());
 	}else{
+		$scope.guesses-- ;
 		$scope.incorrectGuess.push($scope.input.letter.toLowerCase());
 	}
 	$scope.input.letter = "";
+	if ($scope.guesses == 0) {
+		alert("You Lost");
+		$timeout(function(){
+			newGame();
+		},400);
+	}
+	if ($scope.displayWord.indexOf("*") == -1) {
+		alert("You Won. Yayy!");
+	}
 }
 
 newGame();
